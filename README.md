@@ -12,10 +12,10 @@ npm install react-native-communications
 
 ```js
 phonecall(phoneNumber, prompt)
-```
 
-`phoneNumber - String` 
-`prompt - Boolean`
+phoneNumber - String
+prompt - Boolean
+```
 
 Both arguments are required and need to be of the correct type.
 
@@ -27,13 +27,13 @@ If you face any problems having apps approved because of this raise an issue in 
 
 ```js
 email(to, cc, bcc, subject, body)
-```
 
-`to - String Array` 
-`cc - String Array` 
-`bcc - String Array` 
-`subject - String` 
-`body - String`
+to - String Array
+cc - String Array
+bcc - String Array
+subject - String
+body - String
+```
 
 You must supply either 0 arguments or the full set (5).
 
@@ -55,9 +55,9 @@ e.g.
 
 ```js
 text(phoneNumber)
-```
 
-`phoneNumber - String`
+phoneNumber - String
+```
 
 `phoneNumber` is an optional argument. If it is not provided then the new message view will be launched with no recipient specified.
 
