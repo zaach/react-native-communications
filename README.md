@@ -65,6 +65,8 @@ If it is provided but is the wrong type then again the new message view will be 
 
 ## Usage
 
+**Note:** This will only work when run on an actual device. The iOS simulator does not have the required device components installed.
+
 Assuming you have `npm install -g react-native-cli`, first generate an app:
 
 ```bash
