@@ -3,6 +3,8 @@ var React = require('react-native');
 
 var {
 	LinkingIOS,
+	IntentAndroid,
+	Platform,
 } = React;
 
 var communication = {
@@ -22,7 +24,15 @@ var communication = {
 			return;
 		}
 
-		var url = prompt ? 'telprompt:' : 'tel:';
+		var url;
+
+		if(Platform.OS !== 'android') {
+			url = prompt ? 'telprompt:' : 'tel:';
+		}
+		else {
+			url = 'tel:';
+		}
+
 		url += phoneNumber;
 
 		LaunchURL(url);
@@ -124,11 +134,12 @@ var communication = {
 };
 
 var LaunchURL = function(url) {
-	LinkingIOS.canOpenURL(url, (supported) => {
+	var Linker = Platform.OS === 'android' ? IntentAndroid : LinkingIOS;
+	Linker.canOpenURL(url, (supported) => {
 			if (!supported) {
 		    	console.log('Can\'t handle url: ' + url);
 		  	} else {
-		    	LinkingIOS.openURL(url);
+		    	Linker.openURL(url);
 		  	}
 	});
 };

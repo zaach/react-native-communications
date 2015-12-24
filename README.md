@@ -1,6 +1,8 @@
 # react-native-communications
 
-Easily call, email, text or iMessage someone in React Native
+[Release Notes](https://github.com/anarchicknight/react-native-communications/releases)
+
+Easily call, email, text or iMessage (iOS only) someone in React Native
 
 ## Installation
 
@@ -19,9 +21,15 @@ prompt - Boolean
 
 Both arguments are required and need to be of the correct type.
 
+###### iOS
+
 If `prompt` is true it uses the undocumented `telprompt:` url scheme. This triggers an alert asking user to confirm if they want to dial the number. There are conflicting reports around the internet about whether Apple will allow apps using this scheme to be submitted to the App store (some have had success and others have had rejections).
 
 If you face any problems having apps approved because of this raise an issue in this repo and I will look at removing it.
+
+###### Android
+
+`telprompt:` is not supported on Android. The `prompt` argument is ignored when run on Android devices.
 
 ---
 
@@ -65,7 +73,9 @@ If it is provided but is the wrong type then again the new message view will be 
 
 ## Usage
 
-**Note:** This will only work when run on an actual device. The iOS simulator does not have the required device components installed.
+**Note:**
+
+This will only work fully when run on actual devices. The iOS simulator does not have the required device components installed to run any of the methods. The Android emulator only has the messages component installed which will support the `text` method.
 
 Assuming you have `npm install -g react-native-cli`, first generate an app:
 
@@ -75,7 +85,7 @@ cd RNCommunications
 npm install react-native-communications --save
 ```
 
-Then paste the following into `RNCommunications/index.ios.js`:
+Then paste the following into `RNCommunications/index.ios.js` and/or `RNCommunications/index.android.js`:
 
 ```js
 'use strict';
@@ -141,3 +151,7 @@ var styles = StyleSheet.create({
 
 AppRegistry.registerComponent('RNCommunications', () => RNCommunications);
 ```
+
+## TODO
+
+- [ ] Refactor how arguments are passed in to the methods (change from multiple parameters to an args object)
