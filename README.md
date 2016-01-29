@@ -2,7 +2,7 @@
 
 [Release Notes](https://github.com/anarchicknight/react-native-communications/releases)
 
-Easily call, email, text or iMessage (iOS only) someone in React Native
+Open a web address, easily call, email, text, iMessage (iOS only) someone in React Native
 
 ## Installation
 
@@ -76,15 +76,15 @@ If it is provided but is the wrong type then again the new message view will be 
 web(address)
 
 address- String
-`address` can ben any valid url, eg. 'http://www.github.com'
-
 ```
+
+Current requirement on `address` are that it is provided and is a String. There is no validation on whether it is a valid address.
 
 ## Usage
 
 **Note:**
 
-This will only work fully when run on actual devices. The iOS simulator does not have the required device components installed to run any of the methods. The Android emulator only has the messages component installed which will support the `text` method.
+This will only work fully when run on actual devices. The iOS simulator only supports the `web` method and does not have the required device components installed to run any of the other methods. The Android emulator can run all the methods apart from `email`.
 
 Assuming you have `npm install -g react-native-cli`, first generate an app:
 
@@ -116,18 +116,23 @@ var RNCommunications = React.createClass({
     return (
       <View style={styles.container}>
       <TouchableOpacity onPress={() => Communications.phonecall('0123456789', true)}>
-        <View style={styles.phone}>
+        <View style={styles.holder}>
           <Text style={styles.text}>Make phonecall</Text>
         </View>
       </TouchableOpacity>
       <TouchableOpacity onPress={() => Communications.email(['emailAddress1', 'emailAddress2'],null,null,'My Subject','My body text')}>
-        <View style={styles.email}>
+        <View style={styles.holder}>
           <Text style={styles.text}>Send an email</Text>
         </View>
       </TouchableOpacity>
       <TouchableOpacity onPress={() => Communications.text('0123456789')}>
-        <View style={styles.sms}>
+        <View style={styles.holder}>
           <Text style={styles.text}>Send a text/iMessage</Text>
+        </View>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => Communications.web('https://github.com/facebook/react-native')}>
+        <View style={styles.holder}>
+          <Text style={styles.text}>Open react-native repo on Github</Text>
         </View>
       </TouchableOpacity>
       </View>
@@ -141,16 +146,8 @@ var styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'rgb(253,253,253)',
   },
-  phone: {
-    flex: 33,
-    justifyContent: 'center',
-  },
-  email: {
-    flex: 33,
-    justifyContent: 'center',
-  },
-  sms: {
-    flex: 33,
+  holder: {
+    flex: 0.25,
     justifyContent: 'center',
   },
   text: {

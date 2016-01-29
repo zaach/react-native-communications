@@ -136,6 +136,11 @@ var communication = {
         console.log('Missing address argument');
         return;
       }
+      if(!isCorrectType('String', address)) {
+      	console.log('address was not provided as a string, it was provided as '
+      		+ Object.prototype.toString.call(address).slice(8, -1));
+      	return;
+      }
       LaunchURL(address);
     }
 };
