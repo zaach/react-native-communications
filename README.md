@@ -75,10 +75,10 @@ If it is provided but is the wrong type then again the new message view will be 
 ```js
 web(address)
 
-address- String
+address - String
 ```
 
-Current requirement on `address` are that it is provided and is a String. There is no validation on whether it is a valid address.
+Current requirements for `address` are that it is provided and is a String. There is no validation on whether it is a valid address.
 
 ## Usage
 
