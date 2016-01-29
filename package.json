@@ -1,6 +1,6 @@
 {
   "name": "react-native-communications",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Easily call, email, text or iMessage (iOS only) someone in React Native",
   "main": "AKCommunications.js",
   "repository": {
