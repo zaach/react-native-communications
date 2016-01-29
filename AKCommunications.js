@@ -131,6 +131,13 @@ var communication = {
 
 		LaunchURL(url);
 	},
+    web: function(address) {
+      if(!address) {
+        console.log('Missing address argument');
+        return;
+      }
+      LaunchURL(address);
+    }
 };
 
 var LaunchURL = function(url) {

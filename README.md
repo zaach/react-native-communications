@@ -71,6 +71,15 @@ phoneNumber - String
 
 If it is provided but is the wrong type then again the new message view will be launched with no recipient specified.
 
+---
+```js
+web(address)
+
+address- String
+`address` can ben any valid url, eg. 'http://www.github.com'
+
+```
+
 ## Usage
 
 **Note:**
