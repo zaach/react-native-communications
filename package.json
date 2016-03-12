@@ -1,6 +1,6 @@
 {
   "name": "react-native-communications",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Open a web address or call, email, text or iMessage (iOS only) someone in React Native",
   "main": "AKCommunications.js",
   "repository": {

@@ -3,6 +3,7 @@ var React = require('react-native');
 
 var {
 	Linking,
+	Platform,
 } = React;
 
 var communication = {

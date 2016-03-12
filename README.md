@@ -12,7 +12,11 @@ If you are on **React Native >= 0.20** just
 npm install react-native-communications
 ```
 
-Versions 0.15 through to and including 0.19 of React Native are also supported by running the following installation command
+**Note:** Do not use version 1.0.0 of this module as it contained a bug with the phonecall method.
+
+---
+
+**Versions 0.15 through to and including 0.19 of React Native** are also supported by running the following installation command
 
 ```bash
 npm install react-native-communications@0.2.3
