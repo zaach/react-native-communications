@@ -2,9 +2,7 @@
 var React = require('react-native');
 
 var {
-	LinkingIOS,
-	IntentAndroid,
-	Platform,
+	Linking,
 } = React;
 
 var communication = {
@@ -146,14 +144,13 @@ var communication = {
 };
 
 var LaunchURL = function(url) {
-	var Linker = Platform.OS === 'android' ? IntentAndroid : LinkingIOS;
-	Linker.canOpenURL(url, (supported) => {
-			if (!supported) {
-		    	console.log('Can\'t handle url: ' + url);
-		  	} else {
-		    	Linker.openURL(url);
-		  	}
-	});
+	Linking.canOpenURL(url).then(supported => {
+		if(!supported) {
+			console.log('Can\'t handle url: ' + url);
+		} else {
+			return Linking.openURL(url);
+		}
+	}).catch(err => console.error('An unexpected error happened', err));
 };
 
 var getValidArgumentsFromArray = function(array, type) {

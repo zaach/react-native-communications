@@ -6,8 +6,16 @@ Open a web address, easily call, email, text, iMessage (iOS only) someone in Rea
 
 ## Installation
 
+If you are on **React Native >= 0.20** just
+
 ```bash
 npm install react-native-communications
+```
+
+Versions 0.15 through to and including 0.19 of React Native are also supported by running the following installation command
+
+```bash
+npm install react-native-communications@0.2.3
 ```
 
 ## Methods
