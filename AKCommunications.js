@@ -1,13 +1,12 @@
 'use strict';
-var React = require('react-native');
 
-var {
+import {
 	Linking,
 	Platform,
-} = React;
+} from 'react-native';
 
-var communication = {
-	phonecall: function(phoneNumber, prompt) {
+const communication = {
+	phonecall(phoneNumber, prompt) {
 		if(arguments.length !== 2) {
 			console.log('you must supply exactly 2 arguments');
 			return;
@@ -23,7 +22,7 @@ var communication = {
 			return;
 		}
 
-		var url;
+		let url;
 
 		if(Platform.OS !== 'android') {
 			url = prompt ? 'telprompt:' : 'tel:';
@@ -37,9 +36,9 @@ var communication = {
 		LaunchURL(url);
 	},
 
-	email: function(to, cc, bcc, subject, body){
-		var url = 'mailto:';
-		var argLength = arguments.length;
+	email(to, cc, bcc, subject, body){
+		let url = 'mailto:';
+		let argLength = arguments.length;
 
 		switch(argLength) {
 			case 0:
@@ -54,11 +53,11 @@ var communication = {
 
 		// we use this Boolean to keep track of when we add a new parameter to the querystring
 		// it helps us know when we need to add & to separate parameters
-		var valueAdded = false;
+		let valueAdded = false;
 
 		if(isCorrectType('Array', arguments[0])) {
-			var validAddresses = getValidArgumentsFromArray(arguments[0], 'String');
-			
+			let validAddresses = getValidArgumentsFromArray(arguments[0], 'String');
+
 			if(validAddresses.length > 0) {
 				url += validAddresses.join(',');
 			}
@@ -67,7 +66,7 @@ var communication = {
 		url += '?';
 
 		if(isCorrectType('Array', arguments[1])) {
-			var validAddresses = getValidArgumentsFromArray(arguments[1], 'String');
+			let validAddresses = getValidArgumentsFromArray(arguments[1], 'String');
 
 			if(validAddresses.length > 0) {
 				valueAdded = true;
@@ -80,8 +79,8 @@ var communication = {
 				url += '&';
 			}
 
-			var validAddresses = getValidArgumentsFromArray(arguments[2], 'String');
-			
+			let validAddresses = getValidArgumentsFromArray(arguments[2], 'String');
+
 			if(validAddresses.length > 0) {
 				valueAdded = true;
 				url += 'bcc=' + validAddresses.join(',');
@@ -110,27 +109,28 @@ var communication = {
 		LaunchURL(url);
 	},
 
-	text: function(phoneNumber) {
+	text(phoneNumber) {
 		if(arguments.length > 1) {
 			console.log('you supplied too many arguments. You can either supply 0 or 1');
 			return;
 		}
 
-		var url = 'sms:';
+		let url = 'sms:';
 
 		if(arguments.length !== 0) {
 			if(isCorrectType('String', phoneNumber)) {
 				url += phoneNumber;
 			} else {
-				console.log('the phone number should be provided as a string. It was provided as ' 
-					+ Object.prototype.toString.call(phoneNumber).slice(8, -1) 
+				console.log('the phone number should be provided as a string. It was provided as '
+					+ Object.prototype.toString.call(phoneNumber).slice(8, -1)
 					+ ',ignoring the value provided');
 			}
 		}
 
 		LaunchURL(url);
 	},
-    web: function(address) {
+
+    web(address) {
       if(!address) {
         console.log('Missing address argument');
         return;
@@ -144,7 +144,7 @@ var communication = {
     }
 };
 
-var LaunchURL = function(url) {
+const LaunchURL = (url) => {
 	Linking.canOpenURL(url).then(supported => {
 		if(!supported) {
 			console.log('Can\'t handle url: ' + url);
@@ -154,7 +154,7 @@ var LaunchURL = function(url) {
 	}).catch(err => console.error('An unexpected error happened', err));
 };
 
-var getValidArgumentsFromArray = function(array, type) {
+const getValidArgumentsFromArray = (array, type) => {
 	var validValues = [];
 	array.forEach(function(value) {
 		if(isCorrectType(type, value)) {
@@ -165,8 +165,8 @@ var getValidArgumentsFromArray = function(array, type) {
 	return validValues;
 };
 
-var isCorrectType = function(expected, actual) {
+const isCorrectType = (expected, actual) => {
 	return Object.prototype.toString.call(actual).slice(8, -1) === expected;
 };
 
-module.exports = communication;
+export default communication;
