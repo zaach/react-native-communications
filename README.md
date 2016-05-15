@@ -6,21 +6,31 @@ Open a web address, easily call, email, text, iMessage (iOS only) someone in Rea
 
 ## Installation
 
-If you are on **React Native >= 0.20** just
+**React Native >= 0.25**
 
 ```bash
 npm install react-native-communications
+```
+
+---
+
+**React Native >=0.20 < 0.25**
+
+```bash
+npm install react-native-communications@1.0.1
 ```
 
 **Note:** Do not use version 1.0.0 of this module as it contained a bug with the phonecall method.
 
 ---
 
-**Versions 0.15 through to and including 0.19 of React Native** are also supported by running the following installation command
+**React Native >=0.15 <=0.19**
 
 ```bash
 npm install react-native-communications@0.2.3
 ```
+
+---
 
 ## Methods
 
@@ -108,45 +118,48 @@ npm install react-native-communications --save
 
 Then paste the following into `RNCommunications/index.ios.js` and/or `RNCommunications/index.android.js`:
 
+**Note:** The following sample code has been updated to use es6 syntax and imports supported from React Native 0.25 onwards
+
 ```js
 'use strict';
 
-var React = require('react-native');
-var {
+import React from 'react';
+
+import {
   AppRegistry,
   StyleSheet,
   Text,
-  TouchableOpacity,
   View,
-} = React;
+  TouchableOpacity
+} from 'react-native';
 
-var Communications = require('react-native-communications');
+import Communications from 'react-native-communications';
 
-var RNCommunications = React.createClass({
+const RNCommunications = React.createClass({
 
-  render: function() {
+  render() {
     return (
       <View style={styles.container}>
-      <TouchableOpacity onPress={() => Communications.phonecall('0123456789', true)}>
-        <View style={styles.holder}>
-          <Text style={styles.text}>Make phonecall</Text>
-        </View>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => Communications.email(['emailAddress1', 'emailAddress2'],null,null,'My Subject','My body text')}>
-        <View style={styles.holder}>
-          <Text style={styles.text}>Send an email</Text>
-        </View>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => Communications.text('0123456789')}>
-        <View style={styles.holder}>
-          <Text style={styles.text}>Send a text/iMessage</Text>
-        </View>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => Communications.web('https://github.com/facebook/react-native')}>
-        <View style={styles.holder}>
-          <Text style={styles.text}>Open react-native repo on Github</Text>
-        </View>
-      </TouchableOpacity>
+        <TouchableOpacity onPress={() => Communications.phonecall('0123456789', true)}>
+          <View style={styles.holder}>
+            <Text style={styles.text}>Make phonecall</Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => Communications.email(['emailAddress1', 'emailAddress2'],null,null,'My Subject','My body text')}>
+          <View style={styles.holder}>
+            <Text style={styles.text}>Send an email</Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => Communications.text('0123456789')}>
+          <View style={styles.holder}>
+            <Text style={styles.text}>Send a text/iMessage</Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => Communications.web('https://github.com/facebook/react-native')}>
+          <View style={styles.holder}>
+            <Text style={styles.text}>Open react-native repo on Github</Text>
+          </View>
+        </TouchableOpacity>
       </View>
     );
   }
