@@ -59,7 +59,7 @@ const communication = {
 			let validAddresses = getValidArgumentsFromArray(arguments[0], 'String');
 
 			if(validAddresses.length > 0) {
-				url += validAddresses.join(',');
+				url += encodeURIComponent(validAddresses.join(','));
 			}
 		}
 
@@ -70,7 +70,7 @@ const communication = {
 
 			if(validAddresses.length > 0) {
 				valueAdded = true;
-				url += 'cc=' + validAddresses.join(',');
+				url += 'cc=' + encodeURIComponent(validAddresses.join(','));
 			}
 		}
 
@@ -83,7 +83,7 @@ const communication = {
 
 			if(validAddresses.length > 0) {
 				valueAdded = true;
-				url += 'bcc=' + validAddresses.join(',');
+				url += 'bcc=' + encodeURIComponent(validAddresses.join(','));
 			}
 		}
 
@@ -93,7 +93,7 @@ const communication = {
 			}
 
 			valueAdded = true;
-			url += 'subject=' + arguments[3];
+			url += 'subject=' + encodeURIComponent(arguments[3]);
 		}
 
 		if(isCorrectType('String', arguments[4])) {
@@ -101,10 +101,10 @@ const communication = {
 				url += '&';
 			}
 
-			url += 'body=' + arguments[4];
+			url += 'body=' + encodeURIComponent(arguments[4]);
 		}
 
-		url = encodeURI(url);
+		
 
 		LaunchURL(url);
 	},
