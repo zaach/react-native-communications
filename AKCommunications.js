@@ -129,7 +129,7 @@ const communication = {
 
 		if(body) {
 			if(isCorrectType('String', body)) {
-				url += `;body=${body}`;
+				url += `&body=${body}`;
 			} else {
 				console.log('the body should be provided as a string. It was provided as '
 					+ Object.prototype.toString.call(body).slice(8, -1)
