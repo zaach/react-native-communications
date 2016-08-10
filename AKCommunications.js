@@ -59,7 +59,7 @@ const communication = {
 			let validAddresses = getValidArgumentsFromArray(arguments[0], 'String');
 
 			if(validAddresses.length > 0) {
-				url += validAddresses.join(',');
+				url += encodeURIComponent(validAddresses.join(','));
 			}
 		}
 
@@ -70,7 +70,7 @@ const communication = {
 
 			if(validAddresses.length > 0) {
 				valueAdded = true;
-				url += 'cc=' + validAddresses.join(',');
+				url += 'cc=' + encodeURIComponent(validAddresses.join(','));
 			}
 		}
 
@@ -83,7 +83,7 @@ const communication = {
 
 			if(validAddresses.length > 0) {
 				valueAdded = true;
-				url += 'bcc=' + validAddresses.join(',');
+				url += 'bcc=' + encodeURIComponent(validAddresses.join(','));
 			}
 		}
 
@@ -93,7 +93,7 @@ const communication = {
 			}
 
 			valueAdded = true;
-			url += 'subject=' + arguments[3];
+			url += 'subject=' + encodeURIComponent(arguments[3]);
 		}
 
 		if(isCorrectType('String', arguments[4])) {
@@ -101,28 +101,38 @@ const communication = {
 				url += '&';
 			}
 
-			url += 'body=' + arguments[4];
+			url += 'body=' + encodeURIComponent(arguments[4]);
 		}
 
-		url = encodeURI(url);
+		
 
 		LaunchURL(url);
 	},
 
-	text(phoneNumber) {
-		if(arguments.length > 1) {
-			console.log('you supplied too many arguments. You can either supply 0 or 1');
+	text(phoneNumber = null, body = null) {
+		if(arguments.length > 2) {
+			console.log('you supplied too many arguments. You can either supply 0 or 1 or 2');
 			return;
 		}
 
 		let url = 'sms:';
 
-		if(arguments.length !== 0) {
+		if(phoneNumber) {
 			if(isCorrectType('String', phoneNumber)) {
 				url += phoneNumber;
 			} else {
 				console.log('the phone number should be provided as a string. It was provided as '
 					+ Object.prototype.toString.call(phoneNumber).slice(8, -1)
+					+ ',ignoring the value provided');
+			}
+		}
+
+		if(body) {
+			if(isCorrectType('String', body)) {
+				url += Platform.OS === 'ios' ? `&body=${body}` : `?body=${body}`;
+			} else {
+				console.log('the body should be provided as a string. It was provided as '
+					+ Object.prototype.toString.call(body).slice(8, -1)
 					+ ',ignoring the value provided');
 			}
 		}
