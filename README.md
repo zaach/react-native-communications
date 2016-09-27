@@ -138,7 +138,12 @@ import {
   TouchableOpacity
 } from 'react-native';
 
+// either import the whole module and call as Communications.method()
 import Communications from 'react-native-communications';
+
+// or can now import single methods and call straight via the method name
+// import { web, phonecall } from 'react-native-communications';
+// e.g. onPress={() => { web('http://www.github.com') }}
 
 const RNCommunications = React.createClass({
 

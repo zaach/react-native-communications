@@ -5,9 +5,8 @@ import {
 	Platform,
 } from 'react-native';
 
-const communication = {
-	phonecall(phoneNumber, prompt) {
-		if(arguments.length !== 2) {
+export const phonecall = (phoneNumber, prompt) => {
+	if(arguments.length !== 2) {
 			console.log('you must supply exactly 2 arguments');
 			return;
 		}
@@ -34,10 +33,10 @@ const communication = {
 		url += phoneNumber;
 
 		LaunchURL(url);
-	},
+}
 
-	email(to, cc, bcc, subject, body){
-		let url = 'mailto:';
+export const email = (to, cc, bcc, subject, body) => {
+	let url = 'mailto:';
 		let argLength = arguments.length;
 
 		switch(argLength) {
@@ -104,13 +103,11 @@ const communication = {
 			url += 'body=' + encodeURIComponent(arguments[4]);
 		}
 
-		
-
 		LaunchURL(url);
-	},
+}
 
-	text(phoneNumber = null, body = null) {
-		if(arguments.length > 2) {
+export const text = (phoneNumber = null, body = null) => {
+	if(arguments.length > 2) {
 			console.log('you supplied too many arguments. You can either supply 0 or 1 or 2');
 			return;
 		}
@@ -138,10 +135,10 @@ const communication = {
 		}
 
 		LaunchURL(url);
-	},
+}
 
-  web(address) {
-    if(!address) {
+export const web = (address) => {
+	if(!address) {
       console.log('Missing address argument');
       return;
     }
@@ -151,8 +148,7 @@ const communication = {
     	return;
     }
     LaunchURL(address);
-  }
-};
+}
 
 const LaunchURL = (url) => {
 	Linking.canOpenURL(url).then(supported => {
@@ -179,4 +175,4 @@ const isCorrectType = (expected, actual) => {
 	return Object.prototype.toString.call(actual).slice(8, -1) === expected;
 };
 
-export default communication;
+export default { phonecall, text, email, web }
