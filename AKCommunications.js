@@ -5,7 +5,7 @@ import {
 	Platform,
 } from 'react-native';
 
-export const phonecall = (phoneNumber, prompt) => {
+export const phonecall = function(phoneNumber, prompt) {
 	if(arguments.length !== 2) {
 			console.log('you must supply exactly 2 arguments');
 			return;
@@ -35,7 +35,7 @@ export const phonecall = (phoneNumber, prompt) => {
 		LaunchURL(url);
 }
 
-export const email = (to, cc, bcc, subject, body) => {
+export const email = function(to, cc, bcc, subject, body) {
 	let url = 'mailto:';
 		let argLength = arguments.length;
 
@@ -106,7 +106,7 @@ export const email = (to, cc, bcc, subject, body) => {
 		LaunchURL(url);
 }
 
-export const text = (phoneNumber = null, body = null) => {
+export const text = function(phoneNumber = null, body = null) {
 	if(arguments.length > 2) {
 			console.log('you supplied too many arguments. You can either supply 0 or 1 or 2');
 			return;
@@ -137,7 +137,7 @@ export const text = (phoneNumber = null, body = null) => {
 		LaunchURL(url);
 }
 
-export const web = (address) => {
+export const web = function(address) {
 	if(!address) {
       console.log('Missing address argument');
       return;
@@ -150,7 +150,7 @@ export const web = (address) => {
     LaunchURL(address);
 }
 
-const LaunchURL = (url) => {
+const LaunchURL = function(url) {
 	Linking.canOpenURL(url).then(supported => {
 		if(!supported) {
 			console.log('Can\'t handle url: ' + url);
@@ -160,7 +160,7 @@ const LaunchURL = (url) => {
 	}).catch(err => console.error('An unexpected error happened', err));
 };
 
-const getValidArgumentsFromArray = (array, type) => {
+const getValidArgumentsFromArray = function(array, type) {
 	var validValues = [];
 	array.forEach(function(value) {
 		if(isCorrectType(type, value)) {
@@ -171,7 +171,7 @@ const getValidArgumentsFromArray = (array, type) => {
 	return validValues;
 };
 
-const isCorrectType = (expected, actual) => {
+const isCorrectType = function(expected, actual) {
 	return Object.prototype.toString.call(actual).slice(8, -1) === expected;
 };
 
