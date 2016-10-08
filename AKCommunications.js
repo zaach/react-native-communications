@@ -126,7 +126,10 @@ export const text = function(phoneNumber = null, body = null) {
 
 		if(body) {
 			if(isCorrectType('String', body)) {
-				url += Platform.OS === 'ios' ? `&body=${body}` : `?body=${body}`;
+				// for some strange reason android seems to have issues with ampersands in the body unless it is encoded twice!
+				// iOS only needs encoding once
+				if(Platform.OS === 'android') body = encodeURIComponent(body);
+				url += Platform.OS === 'ios' ? `&body=${encodeURIComponent(body)}` : `?body=${encodeURIComponent(body)}`;
 			} else {
 				console.log('the body should be provided as a string. It was provided as '
 					+ Object.prototype.toString.call(body).slice(8, -1)
